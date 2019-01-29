@@ -1,25 +1,58 @@
 import React, { useState } from 'react'
+import { Button, Dropdown } from 'antd'
 import './App.css'
 
-const frames = [
-  { id: '1', title: 'Slides', url: 'https://docs.google.com/presentation/d/1GJV5dI1KxTtY4tgXPgmWh-jlujqPvfI_2bLltTISnKw/embed' },
-  { id: '2', title: 'Shell', url: 'http://localhost:8080/' },
-]
-
 const App = () => {
-  const [curId, setCurId] = useState('1')
+  const [showSlides, setShowSlides] = useState(true)
+  const [showCode, setShowCode] = useState(false)
+  const split = showSlides && showCode
 
   return (
     <div className="App">
-      {
-        frames
-          .map(({ id, url, title }) => (
-            <div key={id} className={`App-frame ${id === curId ? 'App-fullscreen' : ''}`}>
-              <div onClick={() => setCurId(id)} title={title} />
-              <iframe src={url} title={title} />
+      <div className="App-actions">
+        <Dropdown
+          overlay={(
+            <div className="App-actions-overlay">
+              <div className="App-actions-button">
+                <Button
+                  icon="desktop"
+                  shape="circle-outline"
+                  onClick={() => setShowSlides(!showSlides)}
+                  ghost={!showSlides}
+                />
+              </div>
+              <div className="App-actions-button">
+                <Button
+                  icon="code"
+                  shape="circle-outline"
+                  onClick={() => setShowCode(!showCode)}
+                  ghost={!showCode}
+                />
+              </div>
             </div>
-          ))
-      }
+          )}
+        >
+          <div className="App-actions-hover" />
+        </Dropdown>
+      </div>
+
+      <iframe
+        src="https://docs.google.com/presentation/d/1GJV5dI1KxTtY4tgXPgmWh-jlujqPvfI_2bLltTISnKw/embed"
+        style={{
+          display: !showSlides && 'none',
+          width: split ? '50vw' : '100vw',
+        }}
+        title="Slides"
+      />
+
+      <iframe
+        src="http://localhost:8080"
+        style={{
+          display: !showCode && 'none',
+          width: split ? '50vw' : '100vw',
+        }}
+        title="Code"
+      />
     </div>
   )
 }

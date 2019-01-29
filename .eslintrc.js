@@ -5,6 +5,9 @@ module.exports = {
         "airbnb"
     ],
     "rules": {
-        "semi": [2, "never"]
+        "semi": [2, "never"],
+        "jsx-a11y/no-static-element-interactions": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/iframe-has-title": "off" 
     }
 };
