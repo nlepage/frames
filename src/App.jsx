@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Button, Dropdown } from 'antd'
+import Button from 'antd/lib/button'
+import Dropdown from 'antd/lib/dropdown'
 import './App.css'
 
 const App = () => {
